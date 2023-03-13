@@ -1,0 +1,67 @@
+body {
+    padding: 10px;
+    
+}
+
+h1 {
+    
+}
+
+
+
+p {
+    color: red;
+}
+
+
+.textArea {
+    display: flex;
+    width:49.5%;
+    /* max-width: 450px; */
+    flex-direction:column;
+    min-width: 450px;
+    min-height: 400px;
+}
+
+.textArea textarea {
+    max-width: 100%;
+    min-width: 90%;
+    height: 100%;
+    resize: vertical;
+    
+}
+
+.textAreaAnswer {
+    display: flex;
+    flex-direction:column;
+    width: 100%;
+    min-width: 450px;
+    min-height: 400px;
+}
+
+.textAreaAnswer textarea{
+    max-width: 100%;
+    min-width: 90%;
+    height: 100%;
+    resize: vertical;
+}
+
+.analyzeForm {
+    display: flex;  
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin:auto;
+    width: 100%;
+
+    
+
+}
+
+.submitButton {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Input and Output Fields</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Input and Output Fields</h1>
+    <form>
+        <div class="analyzeForm">
+            <div class="textArea">
+                <label for="input1">Text for Analysis:</label>
+                <textarea id="input1" name="textToAnalyze"></textarea><br><br>
+            </div>
+            <div class="textArea">
+                <label for="input2">Question:</label>
+                <textarea id="input2" name="question"></textarea><br><br>
+            </div>
+        </div>
+        <input class="submitButton" type="button" value="Submit Question" onclick="processInputs()">
+        <div class="textAreaAnswer">
+            <label for="output">Answer:</label>
+            <textarea id="output" name="answer"></textarea><br><br>
+        </div>
+    </form>
+
+    <script>
+        function processInputs() {
+            var input1 = document.getElementById("input1").value;
+            var input2 = document.getElementById("input2").value;
+            var output = document.getElementById("output");
+
+            // Process the inputs and set the output value
+            output.value = "Input 1: " + input1 + "\nInput 2: " + input2;
+        }
+    </script>
+</body>
+
+</html>
