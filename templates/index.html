@@ -3,26 +3,26 @@
 
 <head>
     <title>Input and Output Fields</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
     <h1>Input and Output Fields</h1>
-    <form>
+    <form action="/send_question" method="POST" name="question_form">
         <div class="analyzeForm">
             <div class="textArea">
-                <label for="input1">Text for Analysis:</label>
-                <textarea id="input1" name="textToAnalyze"></textarea><br><br>
+                <label for="textToAnalyze">Text for Analysis:</label>
+                <textarea id="textToAnalyze" name="textToAnalyze"></textarea><br><br>
             </div>
             <div class="textArea">
-                <label for="input2">Question:</label>
-                <textarea id="input2" name="question"></textarea><br><br>
+                <label for="question">Question:</label>
+                <textarea id="question" name="question"></textarea><br><br>
             </div>
         </div>
         <input class="submitButton" type="button" value="Submit Question" onclick="processInputs()">
         <div class="textAreaAnswer">
-            <label for="output">Answer:</label>
-            <textarea id="output" name="answer"></textarea><br><br>
+            <label for="answer">Answer:</label>
+            <textarea id="answer" name="answer"></textarea><br><br>
         </div>
     </form>
 
@@ -39,3 +39,4 @@
 </body>
 
 </html>
+

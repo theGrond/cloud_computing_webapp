@@ -2,6 +2,7 @@ import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.language.questionanswering import QuestionAnsweringClient
 from azure.ai.language.questionanswering import models as qna
+from flask import Flask, current_app, render_template, request
 
 endpoint = "https://cloud-computing-qa.cognitiveservices.azure.com/"
 credential = AzureKeyCredential("422040cb72d243449ca1a23834532900")
@@ -29,5 +30,19 @@ def main():
     print(u"A: {}".format(best_answer.answer))
     print("Confidence Score: {}".format(output.answers[0].confidence))
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+    # main()
+
+app = Flask(__name__)
+
+@app.route('/process_text', methods=['POST'])
+def process_text():
+  text1 = request.form['text1']
+  text2 = request.form['text2']
+  # Do something with the text data
+  return "Text 1: {}\nText 2: {}".format(text1, text2)
+
+@app.route('/')
+def accessSite():
+    return render_template('index.html')
+
