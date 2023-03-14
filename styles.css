@@ -42,7 +42,7 @@ p {
 .textAreaAnswer textarea{
     max-width: 100%;
     min-width: 90%;
-    height: 100%;
+    height: 400px;
     resize: vertical;
 }
 
@@ -53,9 +53,6 @@ p {
     justify-content: space-between;
     margin:auto;
     width: 100%;
-
-    
-
 }
 
 .submitButton {
