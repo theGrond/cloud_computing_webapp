@@ -28,15 +28,30 @@
 
     <script>
         function processInputs() {
-            var input1 = document.getElementById("textToAnalyze").value;
-            var input2 = document.getElementById("question").value;
-            var output = document.getElementById("answer");
+            var text = document.getElementById("textToAnalyze").value;
+            var question = document.getElementById("question").value;
+            var answer = document.getElementById("answer");
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/getAnswer');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    answer.value = xhr.responseText
+                } else {
+                    console.error(xhr.statusText);
+                }
+            };
+            xhr.onerror = function () {
+                console.error(xhr.statusText);
+            };
+            xhr.send(JSON.stringify({ text: text, question: question })); 
 
             // Process the inputs and set the output value
-            output.value = "textToAnalyze: " + input1 + "\nquestion: " + input2;
+            // answer.value = "textToAnalyze: " + text + "\nquestion: " + question;
         }
     </script>
 </body>
 
 </html>
-

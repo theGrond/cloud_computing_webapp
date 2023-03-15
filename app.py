@@ -7,40 +7,45 @@ from flask import Flask, current_app, render_template, request
 endpoint = "https://cloud-computing-qa.cognitiveservices.azure.com/"
 credential = AzureKeyCredential("422040cb72d243449ca1a23834532900")
 
-def main():
+def getAnswer(text, question):
     client = QuestionAnsweringClient(endpoint, credential)
     with client:
-        question="who was darth plagueis?"#"How long does it takes to charge a surface?"
+        # question="who was darth plagueis?"#"How long does it takes to charge a surface?"
         input = qna.AnswersFromTextOptions(
             question=question,
             text_documents=[
-                "Power and charging. It takes two to four hours to charge the Surface Pro 4 battery fully from an empty state. " +
-                "It can take longer if you're using your Surface for power-intensive activities like gaming or video streaming while you're charging it.",
-                "You can use the USB port on your Surface Pro 4 power supply to charge other devices, like a phone, while your Surface charges. " +
-                "The USB port on the power supply is only for charging, not for data transfer. If you want to use a USB device, plug it into the USB port on your Surface.",
-                "Darth Plagueis was a Dark Lord of the Sith so powerful and so wise, he could use the Force to influence the midi-chlorians to create life."
+                text
             ]
         )
-
-
         output = client.get_answers_from_text(input)
 
-    best_answer = [a for a in output.answers if a.confidence > 0.9][0]
+    best_answer = output.answers[0]
     print(u"Q: {}".format(input.question))
     print(u"A: {}".format(best_answer.answer))
     print("Confidence Score: {}".format(output.answers[0].confidence))
 
+    return best_answer.answer
+
 # if __name__ == '__main__':
     # main()
 
+def getBest(a):
+  return a.confidence
+
 app = Flask(__name__)
 
-@app.route('/process_text', methods=['POST'])
+@app.route('/getAnswer', methods=['POST'])
 def process_text():
-  text1 = request.form['text1']
-  text2 = request.form['text2']
-  # Do something with the text data
-  return "Text 1: {}\nText 2: {}".format(text1, text2)
+    data = request.json
+
+    text = data['text']
+    question = data['question']
+    print("Text: "+text+"\nQuestion: "+question)
+    
+    answer = getAnswer(text, question)
+
+    return answer
+  #return "Text 1: {}\nText 2: {}".format(text1, text2)
 
 @app.route('/')
 def accessSite():

@@ -20,29 +20,32 @@ p {
     /* max-width: 450px; */
     flex-direction:column;
     min-width: 450px;
-    min-height: 400px;
+    min-height: 100px;
 }
 
 .textArea textarea {
     max-width: 100%;
     min-width: 90%;
+    min-height: 100px;
     height: 100%;
     resize: vertical;
-    
 }
+
+
 
 .textAreaAnswer {
     display: flex;
     flex-direction:column;
     width: 100%;
     min-width: 450px;
-    min-height: 400px;
+    min-height: 100px;
 }
 
 .textAreaAnswer textarea{
     max-width: 100%;
     min-width: 90%;
-    height: 400px;
+    min-height: 100px;
+    height: 100%;
     resize: vertical;
 }
 
