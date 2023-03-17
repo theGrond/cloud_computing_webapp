@@ -1,10 +1,35 @@
 body {
     padding: 10px;
-    
+    font-family: 'Poppins', sans-serif;
 }
 
+
+
 h1 {
-    
+    justify-content: center;
+}
+
+label {
+    font-size: large;
+    font-weight: 100;
+    margin-bottom: 5px;
+}
+
+img {
+    position: relative;
+    top: 6px;
+    width: 35px;
+    height: auto;
+}
+
+
+
+textarea{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+    border: none;
 }
 
 
@@ -13,17 +38,27 @@ p {
     color: red;
 }
 
+.analyzeForm {
+    display: flex;  
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content:center;
+    margin:auto;
+    width: 100%;
+    height:80vh;
+}
 
-.textArea {
+.containerAnalysis {
     display: flex;
     width:49.5%;
     /* max-width: 450px; */
     flex-direction:column;
     min-width: 450px;
     min-height: 100px;
+    margin-right: 10px;
 }
 
-.textArea textarea {
+.containerAnalysis textarea {
     max-width: 100%;
     min-width: 90%;
     min-height: 100px;
@@ -33,10 +68,41 @@ p {
 
 
 
+
+.containerQuestionAnswer {
+    display: flex;
+    width:49.5%;
+    /* max-width: 450px; */
+    flex-direction:column;
+    min-width: 450px;
+    min-height: 100px;
+    align-items: center;
+}
+
+.inputQuestion {
+    display: flex;
+    /* max-width: 450px; */
+    flex-direction:column;
+    height: 70px;
+    width: 100%;
+}
+
+.inputQuestion input {
+    height: 100%;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+    border: none;
+}
+
+
+
 .textAreaAnswer {
     display: flex;
     flex-direction:column;
     width: 100%;
+    height: 100%;
     min-width: 450px;
     min-height: 100px;
 }
@@ -49,19 +115,46 @@ p {
     resize: vertical;
 }
 
-.analyzeForm {
-    display: flex;  
-    flex-direction:row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin:auto;
-    width: 100%;
-}
+
 
 .submitButton {
     margin: auto;
     width: 100%;
     padding: 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+    color: black;
+    border: solid 2px rgb(51, 51, 219);
+    transition-duration: 0.2s;
 }
+  
+  .submitButton:hover {
+    background-color: rgb(51, 51, 219); /* Green */
+    color: white;
+  }
+
+.loader {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid rgb(51, 51, 219); /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+  }
+
+  
+.loaderContainer{
+    display: none;
+    margin-top: 20px;
+    margin-bottom: 12px;
+
+}
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 

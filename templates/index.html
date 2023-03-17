@@ -4,30 +4,49 @@
 <head>
     <title>Input and Output Fields</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Input and Output Fields</h1>
-    <form action="/send_question" method="POST" name="question_form">
-        <div class="analyzeForm">
-            <div class="textArea">
-                <label for="textToAnalyze">Text for Analysis:</label>
-                <textarea id="textToAnalyze" name="textToAnalyze"></textarea><br><br>
-            </div>
-            <div class="textArea">
-                <label for="question">Question:</label>
-                <textarea id="question" name="question"></textarea><br><br>
-            </div>
+    <h1>
+    <img src="{{ url_for('static', filename='questionmark.png') }}" alt="Italian Trulli">
+    Question Answering</h1>
+    <form class="analyzeForm" id="analyzeForm" onSubmit="processInputs()" name="question_form">
+        <div class="containerAnalysis">
+            <label for="textToAnalyze">Text for Analysis:</label>
+            <textarea id="textToAnalyze" name="textToAnalyze"></textarea><br><br>
         </div>
-        <input class="submitButton" type="button" value="Submit Question" onclick="processInputs()">
-        <div class="textAreaAnswer">
-            <label for="answer">Answer:</label>
-            <textarea id="answer" name="answer"></textarea><br><br>
+        <div class="containerQuestionAnswer">
+            <div class="inputQuestion">
+                <label for="question">Question:</label>
+                <input type="text" id="question" name="question"></textarea><br><br>
+            </div>
+            <input class="submitButton" id="submitButton" type="submit" value="Answer Question" >
+            <div id="loaderContainer" class="loaderContainer">
+                <div class="loader"></div> 
+            </div>
+            <div class="textAreaAnswer">
+                <label for="answer">Answer:</label>
+                <textarea id="answer" name="answer"></textarea><br><br>
+            </div>
         </div>
     </form>
 
     <script>
+        var form = document.getElementById("analyzeForm");
+        function handleForm(event) { event.preventDefault(); } 
+        form.addEventListener('submit', handleForm);
+        var displaySpinner = false;
+
         function processInputs() {
+            var loader = document.getElementById("loaderContainer");
+            var submitButton = document.getElementById("submitButton");
+
+            loader.style.display = "block";
+            submitButton.style.display = "none";
+
             var text = document.getElementById("textToAnalyze").value;
             var question = document.getElementById("question").value;
             var answer = document.getElementById("answer");
@@ -39,8 +58,12 @@
                 if (xhr.status === 200) {
                     console.log(xhr.responseText);
                     answer.value = xhr.responseText
+                    loader.style.display = "none";
+                    submitButton.style.display = "block";
                 } else {
                     console.error(xhr.statusText);
+                    loader.style.display = "none";
+                    submitButton.style.display = "block";
                 }
             };
             xhr.onerror = function () {
