@@ -1,17 +1,10 @@
 body {
-    padding: 10px;
+    padding-left: 10px;
     font-family: 'Poppins', sans-serif;
-}
-
-
-
-h1 {
-    justify-content: center;
 }
 
 label {
     font-size: large;
-    font-weight: 100;
     margin-bottom: 5px;
 }
 
@@ -22,20 +15,13 @@ img {
     height: auto;
 }
 
-
-
 textarea{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     padding: 5px;
     background-color: rgb(236, 236, 236);
     border-radius: 5px;
     border: none;
-}
-
-
-
-p {
-    color: red;
+    margin-bottom:10px;
 }
 
 .analyzeForm {
@@ -45,51 +31,41 @@ p {
     justify-content:center;
     margin:auto;
     width: 100%;
-    height:80vh;
+    height: 85vh;
 }
 
 .containerAnalysis {
     display: flex;
-    width:49.5%;
-    /* max-width: 450px; */
+    width: 47vmax;
     flex-direction:column;
-    min-width: 450px;
-    min-height: 100px;
     margin-right: 10px;
 }
 
 .containerAnalysis textarea {
-    max-width: 100%;
-    min-width: 90%;
-    min-height: 100px;
+    min-height: 220px;
     height: 100%;
     resize: vertical;
 }
 
-
-
-
 .containerQuestionAnswer {
     display: flex;
-    width:49.5%;
-    /* max-width: 450px; */
+    width:47vmax;
     flex-direction:column;
-    min-width: 450px;
-    min-height: 100px;
     align-items: center;
+    margin-right: 10px;
 }
 
 .inputQuestion {
     display: flex;
-    /* max-width: 450px; */
     flex-direction:column;
-    height: 70px;
+    height: 82px;
     width: 100%;
 }
 
 .inputQuestion input {
     height: 100%;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
     padding: 5px;
     background-color: rgb(236, 236, 236);
     border-radius: 5px;
@@ -103,42 +79,37 @@ p {
     flex-direction:column;
     width: 100%;
     height: 100%;
-    min-width: 450px;
     min-height: 100px;
 }
 
 .textAreaAnswer textarea{
-    max-width: 100%;
-    min-width: 90%;
     min-height: 100px;
     height: 100%;
     resize: vertical;
 }
 
-
-
 .submitButton {
-    margin: auto;
     width: 100%;
+    height: 40px;
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: rgb(236, 236, 236);
     border-radius: 5px;
     color: black;
-    border: solid 2px rgb(51, 51, 219);
+    border: solid 2px #0060DF;
     transition-duration: 0.2s;
 }
   
   .submitButton:hover {
-    background-color: rgb(51, 51, 219); /* Green */
+    background-color: #0060DF; /* Green */
     color: white;
   }
 
 .loader {
     border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid rgb(51, 51, 219); /* Blue */
+    border-top: 4px solid #0060DF; /* Blue */
     border-radius: 50%;
     width: 20px;
     height: 20px;

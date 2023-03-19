@@ -11,24 +11,25 @@
 
 <body>
     <h1>
-    <img src="{{ url_for('static', filename='questionmark.png') }}" alt="Italian Trulli">
-    Question Answering</h1>
+        <img src="{{ url_for('static', filename='questionmark.png') }}" alt="Italian Trulli">
+        Question Answering
+    </h1>
     <form class="analyzeForm" id="analyzeForm" onSubmit="processInputs()" name="question_form">
         <div class="containerAnalysis">
-            <label for="textToAnalyze">Text for Analysis:</label>
-            <textarea id="textToAnalyze" name="textToAnalyze"></textarea><br><br>
+            <label for="textToAnalyze">Text for Analysis</label>
+            <textarea id="textToAnalyze" name="textToAnalyze" maxlength="20480"></textarea><br><br>
         </div>
         <div class="containerQuestionAnswer">
             <div class="inputQuestion">
-                <label for="question">Question:</label>
+                <label for="question">Question</label>
                 <input type="text" id="question" name="question"></textarea><br><br>
             </div>
-            <input class="submitButton" id="submitButton" type="submit" value="Answer Question" >
+            <input class="submitButton" id="submitButton" type="submit" value="Answer Question">
             <div id="loaderContainer" class="loaderContainer">
-                <div class="loader"></div> 
+                <div class="loader"></div>
             </div>
             <div class="textAreaAnswer">
-                <label for="answer">Answer:</label>
+                <label for="answer">Answer</label>
                 <textarea id="answer" name="answer"></textarea><br><br>
             </div>
         </div>
@@ -36,7 +37,7 @@
 
     <script>
         var form = document.getElementById("analyzeForm");
-        function handleForm(event) { event.preventDefault(); } 
+        function handleForm(event) { event.preventDefault(); }
         form.addEventListener('submit', handleForm);
         var displaySpinner = false;
 
@@ -69,7 +70,7 @@
             xhr.onerror = function () {
                 console.error(xhr.statusText);
             };
-            xhr.send(JSON.stringify({ text: text, question: question })); 
+            xhr.send(JSON.stringify({ text: text, question: question }));
 
             // Process the inputs and set the output value
             // answer.value = "textToAnalyze: " + text + "\nquestion: " + question;
