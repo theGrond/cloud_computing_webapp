@@ -72,8 +72,6 @@ textarea{
     border: none;
 }
 
-
-
 .textAreaAnswer {
     display: flex;
     flex-direction:column;
@@ -102,10 +100,10 @@ textarea{
     transition-duration: 0.2s;
 }
   
-  .submitButton:hover {
+.submitButton:hover {
     background-color: #0060DF; /* Green */
     color: white;
-  }
+}
 
 .loader {
     border: 4px solid #f3f3f3; /* Light grey */
@@ -114,18 +112,16 @@ textarea{
     width: 20px;
     height: 20px;
     animation: spin 2s linear infinite;
-  }
-
+}
   
 .loaderContainer{
     display: none;
     margin-top: 20px;
     margin-bottom: 12px;
-
 }
   
-  @keyframes spin {
+@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
+}
 

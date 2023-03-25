@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Input and Output Fields</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
@@ -8,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <h1>
         <img src="{{ url_for('static', filename='questionmark.png') }}" alt="Italian Trulli">
@@ -34,7 +32,6 @@
             </div>
         </div>
     </form>
-
     <script>
         var form = document.getElementById("analyzeForm");
         function handleForm(event) { event.preventDefault(); }
@@ -71,11 +68,7 @@
                 console.error(xhr.statusText);
             };
             xhr.send(JSON.stringify({ text: text, question: question }));
-
-            // Process the inputs and set the output value
-            // answer.value = "textToAnalyze: " + text + "\nquestion: " + question;
         }
     </script>
 </body>
-
 </html>
