@@ -1,4 +1,3 @@
-import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.language.questionanswering import QuestionAnsweringClient
 from azure.ai.language.questionanswering import models as qna
@@ -32,9 +31,6 @@ def getAnswer(text, question):
         print("Confidence Score: {}".format(output.answers[0].confidence))
         collection.insert_one({"text": text, "question": question, "answer": best_answer.answer})
         return best_answer.answer
-
-def getBest(a):
-  return a.confidence
 
 app = Flask(__name__)
 
