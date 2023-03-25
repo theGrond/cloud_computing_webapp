@@ -172,16 +172,41 @@ resource "azurerm_virtual_machine" "example" {
       key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC++nOE/n+/bOIP04OtB31SoqiCIQXxxWpZDjhY++cDKNWmb80ysBI+m8ZKymcnJZXisepE62utyqUXUX//neyAZNeOpegfqmLMiBvcIG2dkVBQD8V/Q39rwjbgbofRU3Dal9CrTYOO+VBdeB7FqfaSipUPvX+2YokmjfJO44FpG9OghGDvHhDLwquBnH5EtA5qmRs2VR0KxG/xDuXOA3fPrHLOPDXwnCLGkRriEogK+UbaYyCeWoJUexFHulngXo/QGyfFFLcy9m3vg1TLU3F20+4aQIqWLUP5N8ew8MPgonZshDtebAqGpsVx4nNl89XeapSu4y63R0rI1FJMq5P1yiZUB2rF90Q9OJuu7gYt8PxGEfjAKXpNR5b6fX+Ooz/DtKIx5R2kojFsA5DB7MGXs59iLa1QKVQAUXSXNct7hjoQgD7aHXLel8RIK817hb8lcXh8CUnLE9ODXs0WWzUdILDutknX9HINxxEaKDuchIYrHZWtXrS2lmia21pj6ss= emea\\gohlke@WAEJHPJ3NG"
     }
   }
+}
 
-data "azurerm_cosmosdb_account" "example" {
-  name                = "tfex-cosmosdb-account"
-  resource_group_name = "tfex-cosmosdb-account-rg"
+resource "azurerm_cosmosdb_account" "example" {
+  name                = "max-cosmosdb-account"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  offer_type          = "Standard"
+  kind                = "MongoDB"
+  consistency_policy {  
+    consistency_level = "Session"
+  }
+  geo_location {
+    location          = "switzerlandnorth"
+    failover_priority = 0
+  }
 }
 
 resource "azurerm_cosmosdb_mongo_database" "example" {
-  name                = "tfex-cosmos-mongo-db"
-  resource_group_name = data.azurerm_cosmosdb_account.example.resource_group_name
-  account_name        = data.azurerm_cosmosdb_account.example.name
+  name                = "my-mongo-db"
+  resource_group_name = azurerm_resource_group.example.name
+  account_name        = azurerm_cosmosdb_account.example.name
+}
+
+resource "azurerm_cosmosdb_mongo_collection" "example" {
+  name                = "qa_collection"
+  resource_group_name = azurerm_resource_group.example.name
+  account_name        = azurerm_cosmosdb_account.example.name
+  database_name       = azurerm_cosmosdb_mongo_database.example.name
+
+  default_ttl_seconds = "777"
   throughput          = 400
+
+  index {
+    keys   = ["_id"]
+    unique = true
+  }
 }
-}
+
