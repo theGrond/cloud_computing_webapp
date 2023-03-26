@@ -1,0 +1,87 @@
+---
+- name: Download repo, build container, and start container
+  hosts: remotehost
+  vars:
+    git_repo_url: "https://github.com/theGrond/cloud_computing_webapp.git"
+    git_repo_version: "main"
+    container_name: "flask_app"
+    image_name: "flask_app_image"
+    image_tag: "latest"
+    container_port: 8080
+    host_port: 22
+
+  tasks:
+    - name: Install Docker on Ubuntu
+      become: true
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+        state: present
+
+    - name: Add Docker GPG key
+      become: true
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker APT repository
+      become: true
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
+        state: present
+
+    - name: Install Docker
+      become: true
+      apt:
+        name: docker-ce
+        state: present
+
+
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
+
+    - name: Clone repository
+      git:
+        repo: "{{ git_repo_url }}"
+        dest: /home/azureuser/cloud_computing_webapp
+        version: "{{ git_repo_version }}"
+      become: yes
+      become_user: azureuser
+
+    - name: Install pip3 on Ubuntu
+      become: true
+      apt: 
+        name: python3-pip
+        state: present
+
+    - name: Install Docker SDK for Python library
+      pip:
+        name: docker
+        state: present
+
+    - name: Build container image
+      become: true
+      docker_image:
+        build:
+          path: /cloud_computing_webapp
+          pull: true
+        name: "{{ image_name }}"
+        tag: "{{ image_tag }}"
+
+    - name: Start container
+      become: true
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ image_name }}"
+        published_ports: "{{ container_port }}:{{ host_port }}"
+        state: started
+      become: yes
+      become_user: user
