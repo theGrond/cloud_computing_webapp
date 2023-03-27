@@ -8,7 +8,7 @@
     image_name: "flask_app_image"
     image_tag: "latest"
     container_port: 8080
-    host_port: 22
+    host_port: 5000
 
   tasks:
     - name: Install Docker on Ubuntu
@@ -40,7 +40,6 @@
         name: docker-ce
         state: present
 
-
     - name: Update and upgrade apt packages
       become: true
       apt:
@@ -63,15 +62,23 @@
         state: present
 
     - name: Install Docker SDK for Python library
+      become: true
       pip:
-        name: docker
+        name: docker-py
         state: present
+
+    - name: Add user to docker group
+      become: true
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
 
     - name: Build container image
       become: true
       docker_image:
         build:
-          path: /cloud_computing_webapp
+          path: /home/azureuser/cloud_computing_webapp
           pull: true
         name: "{{ image_name }}"
         tag: "{{ image_tag }}"
@@ -84,4 +91,4 @@
         published_ports: "{{ container_port }}:{{ host_port }}"
         state: started
       become: yes
-      become_user: user
+      become_user: azureuser
