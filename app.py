@@ -1,3 +1,4 @@
+import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.language.questionanswering import QuestionAnsweringClient
 from azure.ai.language.questionanswering import models as qna
@@ -5,9 +6,9 @@ from flask import Flask, current_app, render_template, request
 from pymongo import MongoClient
 
 endpoint = "https://cloud-computing-qa.cognitiveservices.azure.com/"
-credential = AzureKeyCredential("422040cb72d243449ca1a23834532900")
+credential = AzureKeyCredential(os.environ.get('AZURECRED'))
 
-client = MongoClient('mongodb://max-cosmosdb-account:O6FvWPVjizpsTwET3WftAmihvdVKsPcX7pt6zQhVVn3v09FRgarZsWaI5CLLErbOiFrmXcpRbk1iACDb9iRqNQ==@max-cosmosdb-account.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@max-cosmosdb-account@')
+client = MongoClient(os.environ.get('MONGOURL'))
 db = client['my-mongo-db']
 collection = db['qa_collection']
 
