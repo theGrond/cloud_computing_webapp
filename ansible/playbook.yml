@@ -88,6 +88,9 @@
       docker_container:
         name: "{{ container_name }}"
         image: "{{ image_name }}"
+        env:
+          MONGOURL: "{{ lookup('env', 'MONGOURL') }}"
+          AZURECRED: "{{ lookup('env', 'AZURECRED') }}"
         published_ports: "{{ container_port }}:{{ host_port }}"
         state: started
       become: yes

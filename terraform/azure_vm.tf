@@ -212,8 +212,6 @@ resource "azurerm_cosmosdb_mongo_collection" "example" {
   resource_group_name = azurerm_resource_group.example.name
   account_name        = azurerm_cosmosdb_account.example.name
   database_name       = azurerm_cosmosdb_mongo_database.example.name
-
-  default_ttl_seconds = "777"
   throughput          = 400
 
   index {
