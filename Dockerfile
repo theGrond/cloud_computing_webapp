@@ -6,4 +6,4 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 # EXPOSE 8000
 COPY . .
-CMD ["gunicorn", "wsgi:app"]
+CMD ["gunicorn", "-k", "gevent", "-b", "0.0.0.0:8000", "wsgi:app"]
