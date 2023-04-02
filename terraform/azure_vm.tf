@@ -220,10 +220,4 @@ resource "azurerm_cosmosdb_mongo_collection" "example" {
   }
 }
 
-resource "null_resource" "ansible" {
-  provisioner "local-exec" {
-    command = "ansible-playbook -i node_inventory, playbook.yml"
-    working_dir = "${path.module}/../ansible"
-  } 
-}
 
